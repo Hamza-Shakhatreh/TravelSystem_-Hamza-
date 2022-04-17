@@ -87,6 +87,13 @@
             text-decoration:none;
             font-size:large
         }
+        .passClass{
+               width: 65%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          resize: vertical;
+        }
     
     </style>
 </head>
@@ -124,7 +131,7 @@
             <br />
 
 
-            <asp:TextBox ID="TextBoxPass" placeholder="Password" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxPass" placeholder="Password" CssClass="passClass" runat="server" TextMode="Password"></asp:TextBox>
            
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBoxPass" Display="Dynamic" ErrorMessage="Password is Required" ForeColor="Red"></asp:RequiredFieldValidator>
            

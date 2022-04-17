@@ -93,7 +93,7 @@ namespace WebApplication5
 
                     sb.Append("<th>");
                     sb.Append("<a class=" + "editBtn" + " href=" + "adminedit.aspx?id=" + dr["ID"] + "&reserved="+r+ ">Edit</a>");
-                   // sb.Append("<a class=" + "deleteBtn" + " href=" + "cancel.aspx?id=" + dr["ID"] + " >Cancel</a>");
+                    sb.Append("<a class=" + "deleteBtn" + " href=" + "Reservation.aspx?id=" + dr["ID"] + " >View Reservation</a>");
                     sb.Append("</th>");
 
                     sb.Append("</tr>");
