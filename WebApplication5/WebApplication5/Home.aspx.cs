@@ -27,7 +27,7 @@ namespace WebApplication5
                 string mainconn = ConfigurationManager.ConnectionStrings["CS"].ConnectionString;
                 SqlConnection con = new SqlConnection(mainconn);
                 con.Open();
-                string query = "SELECT DISTINCT trip.ID , trip.From_Country , trip.To_Country , trip.Price , trip.Currency_ISO , trip.Time_Stamp FROM trip INNER JOIN reservations ON trip.ID = reservations.trip_id INNER JOIN[dbo].[user] ON reservations.user_id = @uid where reservations.status =1";
+                string query = "SELECT DISTINCT trip.ID , trip.From_Country , trip.To_Country , trip.Price , trip.Currency_ISO , trip.Time_Stamp ,reservations.status , reservations.reason FROM trip INNER JOIN reservations ON trip.ID = reservations.trip_id INNER JOIN[dbo].[user] ON reservations.user_id = @uid ";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@uid", Session["userid"]);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);

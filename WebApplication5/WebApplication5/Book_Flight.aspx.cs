@@ -155,34 +155,62 @@ namespace WebApplication5
             }
             else
             {
-                string Checkquery = "Select  Count (trip_id) From [dbo].[reservations] where trip_id= @tid and user_id= @uid and status =0 ";
+                string query = "select Passengers_Count from [dbo].[trip] where ID=@tid";
+                string reservedquery = "select  Count (user_id) from [dbo].[reservations] where trip_id=@tid";
 
-                SqlCommand cmd2 = new SqlCommand(Checkquery, con);
-                cmd2.Parameters.AddWithValue("@tid", GridView1.SelectedRow.Cells[0].Text);
-                cmd2.Parameters.AddWithValue("@uid", Session["userid"]);
-                int temp = (int)cmd2.ExecuteScalar();
-                if (temp == 1)
+                SqlCommand cmdPC = new SqlCommand(query, con);
+                cmdPC.Parameters.AddWithValue("@tid", GridView1.SelectedRow.Cells[0].Text);
+
+                SqlCommand cmdRC = new SqlCommand(reservedquery, con);
+                cmdRC.Parameters.AddWithValue("@tid", GridView1.SelectedRow.Cells[0].Text);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmdPC);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                int seats =Convert.ToInt32( dt.Rows[0]["Passengers_Count"]);
+                int reserved = (int)cmdRC.ExecuteScalar();
+
+                int remain = seats - reserved;
+                if (remain == 0)
                 {
-                    string editequery = "UPDATE reservations SET status = 1 , reason=NULL WHERE trip_id = @tid and user_id = @uid";
-                    SqlCommand cmd3 = new SqlCommand(editequery, con);
-                    cmd3.Parameters.AddWithValue("@tid", GridView1.SelectedRow.Cells[0].Text);
-                    cmd3.Parameters.AddWithValue("@uid", Session["userid"]);
-
-                    cmd3.ExecuteNonQuery();
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Text = "All seats has been Booked";
                 }
                 else
                 {
 
-                    string inseartQueary = "INSERT INTO reservations (user_id, trip_id, status) VALUES(@uid, @tid, 1)";
-                    SqlCommand cmd = new SqlCommand(inseartQueary, con);
-                    cmd.Parameters.AddWithValue("@tid", GridView1.SelectedRow.Cells[0].Text);
-                    cmd.Parameters.AddWithValue("@uid", Session["userid"]);
-                    cmd.ExecuteNonQuery();
+
+
+
+                    string Checkquery = "Select  Count (trip_id) From [dbo].[reservations] where trip_id= @tid and user_id= @uid and status =0 ";
+
+                    SqlCommand cmd2 = new SqlCommand(Checkquery, con);
+                    cmd2.Parameters.AddWithValue("@tid", GridView1.SelectedRow.Cells[0].Text);
+                    cmd2.Parameters.AddWithValue("@uid", Session["userid"]);
+                    int temp = (int)cmd2.ExecuteScalar();
+                    if (temp == 1)
+                    {
+                        string editequery = "UPDATE reservations SET status = 1 , reason=NULL WHERE trip_id = @tid and user_id = @uid";
+                        SqlCommand cmd3 = new SqlCommand(editequery, con);
+                        cmd3.Parameters.AddWithValue("@tid", GridView1.SelectedRow.Cells[0].Text);
+                        cmd3.Parameters.AddWithValue("@uid", Session["userid"]);
+
+                        cmd3.ExecuteNonQuery();
+                    }
+                    else
+                    {
+
+                        string inseartQueary = "INSERT INTO reservations (user_id, trip_id, status) VALUES(@uid, @tid, 1)";
+                        SqlCommand cmd = new SqlCommand(inseartQueary, con);
+                        cmd.Parameters.AddWithValue("@tid", GridView1.SelectedRow.Cells[0].Text);
+                        cmd.Parameters.AddWithValue("@uid", Session["userid"]);
+                        cmd.ExecuteNonQuery();
+                    }
+
+
+                    Label1.ForeColor = System.Drawing.Color.Green;
+                    Label1.Text = "Successfully added";
                 }
-
-
-                Label1.ForeColor = System.Drawing.Color.Green;
-                Label1.Text = "Successfully added";
             }
 
 

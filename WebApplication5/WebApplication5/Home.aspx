@@ -142,6 +142,9 @@
                             <asp:BoundField DataField="Price" HeaderText="Price" />
                             <asp:BoundField DataField="Currency_ISO" HeaderText="Currency" />
                             <asp:BoundField DataField="Time_Stamp" HeaderText="Trip Time" />
+                             <asp:BoundField DataField="status" HeaderText="Active" />
+                             <asp:BoundField DataField="reason" HeaderText="Reason" />
+
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Action" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:LinkButton runat="server" ID="CancelBtn" Text="Cancel" ToolTip="Cancel Trip" Font-Size="Larger" OnClick="CancelBtn_Click">

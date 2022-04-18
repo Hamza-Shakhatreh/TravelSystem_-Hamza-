@@ -73,7 +73,7 @@ namespace WebApplication5
                 sb.Append("</tr>");
                 foreach (DataRow dr in dt.Rows)
                 {
-                    string query1 = "Select  Count (trip_id) From [dbo].[reservations] where trip_id= @tid and status=1 ";
+                    string query1 = "Select  Count (trip_id) From [dbo].[reservations] where trip_id= @tid";
                     SqlCommand cmd1 = new SqlCommand(query1, con);
                     cmd1.Parameters.AddWithValue("@tid", dr["ID"]);
                     int r = (int)cmd1.ExecuteScalar();

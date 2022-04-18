@@ -110,7 +110,20 @@
 
             <br />
           
-                <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="15" GridLines="Horizontal">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="15" GridLines="Horizontal">
+                    <Columns>
+                        <asp:BoundField DataField="CivilID" HeaderText="Civil ID" />
+                        <asp:BoundField DataField="fullName" HeaderText="Full Name" />
+                        <asp:BoundField DataField="age" HeaderText="Age" />
+                        <asp:BoundField DataField="email" HeaderText="Email" />
+                        <asp:BoundField DataField="phoneNumber" HeaderText="Phone Number" />
+                        <asp:BoundField DataField="country" HeaderText="Country" />
+                        <asp:BoundField DataField="city" HeaderText="City" />
+                        <asp:BoundField DataField="street" HeaderText="Street" />
+                        <asp:BoundField DataField="status" HeaderText="Active" />
+                        <asp:BoundField DataField="reason" HeaderText="Massege" />
+                    </Columns>
+
                     <FooterStyle BackColor="White" ForeColor="#333333" />
                     <HeaderStyle BackColor="#190940" Font-Bold="True" ForeColor="White" />
                     <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />

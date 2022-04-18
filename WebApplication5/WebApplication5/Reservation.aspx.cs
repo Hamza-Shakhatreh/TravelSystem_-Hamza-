@@ -18,7 +18,7 @@ namespace WebApplication5
             string mainconn = ConfigurationManager.ConnectionStrings["CS"].ConnectionString;
             SqlConnection con = new SqlConnection(mainconn);
             con.Open();
-            string query = "SELECT DISTINCT [dbo].[user].CivilID ,[dbo].[user].fullName ,[dbo].[user].age , [dbo].[user].email ,[dbo].[user].phoneNumber ,[dbo].[user].country , [dbo].[user].city ,  [dbo].[user].street , [dbo].[user].password FROM [dbo].[user]  INNER JOIN reservations ON [dbo].[user].CivilID = reservations.user_id INNER JOIN[dbo].[trip] ON reservations.trip_id= @tid where reservations.status =1";
+            string query = "SELECT DISTINCT [dbo].[user].CivilID ,[dbo].[user].fullName ,[dbo].[user].age , [dbo].[user].email ,[dbo].[user].phoneNumber ,[dbo].[user].country , [dbo].[user].city ,  [dbo].[user].street ,[dbo].[reservations].status ,[dbo].[reservations].reason FROM [dbo].[user]  INNER JOIN reservations ON [dbo].[user].CivilID = reservations.user_id INNER JOIN[dbo].[trip] ON reservations.trip_id= @tid";
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@tid", Request.QueryString["id"]);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
